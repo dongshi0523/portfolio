@@ -39,6 +39,23 @@ strong { color: #1a1a1a; }
 .toc { page-break-before: always; }
 .toc ul { list-style: none; padding: 0; }
 .toc li { padding: 6px 0; border-bottom: 1px dotted #ccc; font-size: 12pt; }
+  .back-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #fff; border-top: 1px solid #e0e0e0;
+    padding: 12px 24px; text-align: center; z-index: 1000;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  }
+  .back-bar a {
+    display: inline-block; background: #2563eb; color: #fff;
+    padding: 8px 28px; border-radius: 20px; text-decoration: none;
+    font-size: 14px; font-weight: 500; transition: all 0.2s;
+  }
+  .back-bar a:hover { background: #1d4ed8; }
+  .back-bar span { color: #666; font-size: 13px; margin: 0 12px; }
+  @media print {
+    .back-bar { display: none; }
+  }
+
 </style>
 </head>
 <body>
