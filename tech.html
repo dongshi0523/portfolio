@@ -3,31 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>技术可行性说明书 - 替你选</title>
+<title>技术可行性分析报告</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',-apple-system,"PingFang SC",sans-serif;background:#fafafa;color:#1a1a1a;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#fafafa;color:#1a1a1a;line-height:1.8}
 .hero{background:#0a0a0a;color:white;padding:40px 24px 30px;text-align:center}
 .hero h1{font-size:18pt;font-weight:600}
 .hero p{font-size:10pt;color:#888;margin-top:6px}
-.container{max-width:720px;margin:0 auto;padding:30px 24px 60px}
+.c{max-width:720px;margin:0 auto;padding:30px 24px 60px}
 .back{display:inline-block;margin:16px 0;font-size:10pt;color:#3b82f6;text-decoration:none}
 .back:hover{text-decoration:underline}
-h2{font-size:14pt;font-weight:600;color:#1a5c8a;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid #1a5c8a}
-h3{font-size:12pt;font-weight:600;margin:18px 0 8px;color:#333}
-h4{font-size:11pt;font-weight:600;margin:14px 0 6px;color:#555}
-p{font-size:10pt;line-height:1.8;margin:5px 0;color:#444}
-ul{margin:5px 0 5px 18px}
-li{font-size:10pt;line-height:1.7;margin:3px 0;color:#444}
-pre{font-family:monospace;font-size:9pt;background:#f5f5f5;padding:12px 16px;border-radius:8px;margin:10px 0;overflow-x:auto;line-height:1.5;white-space:pre-wrap}
-.insight{background:#f0f6ff;border-left:4px solid #1a5c8a;padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:10pt}
-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:9pt}
+h1{font-size:18pt;font-weight:700;margin:24px 0 12px}
+h2{font-size:15pt;font-weight:600;color:#1a5c8a;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid #1a5c8a}
+h3{font-size:13pt;font-weight:600;margin:20px 0 8px}
+h4{font-size:11pt;font-weight:600;margin:16px 0 6px}
+p{font-size:10pt;margin:4px 0}
+ul,ol{margin:4px 0 4px 20px}
+li{font-size:10pt;margin:2px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:9pt}
 th{background:#1a5c8a;color:white;padding:6px 8px;text-align:left}
 td{padding:5px 8px;border-bottom:1px solid #eee}
+.tree{font-family:monospace;font-size:9pt;background:#f5f5f5;padding:12px 16px;border-radius:8px;margin:10px 0;white-space:pre-wrap;line-height:1.5}
 </style>
 </head>
 <body>
-<div class="hero"><h1>技术可行性说明书</h1><p>「替你选」微信小程序</p></div>
-<div class="container">
-<h1>“替你选”小程序技术可行性说明书</h1><h3>一、 技术架构概述</h3><div class="insight">根据项目流程图，系统主要由前端展示层（微信小程序）、核心业务逻辑层（抽奖算法与筛选）、数据存储层（用户偏好与避雷库）以及第三方集成接口组成。</div><h3>二、 核心模块可行性分析</h3><h4>1. 抽奖与动画交互模块</h4><p>技术描述： 实现从首页（SCREEN_33）跳转至筛选页，并展示“大转盘”或“老虎机”形式的抽奖动画（SCREEN_39）。</p><p>可行性： 极高。</p><p>交互实现： 微信小程序原生支持 Canvas 或 CSS3 动画，能够流畅实现大转盘或老虎机视觉效果。</p><p>传感器调用： 流程图提到的“摇一摇”功能（开启摇摇传感器）可通过微信小程序的 wx.onAccelerometerChange 接口监听加速度计数据，触发随机抽取逻辑。</p><h4>2. “避雷”驱动的动态抽奖算法</h4><p>技术描述： 系统需整合用户即时筛选条件（分类、预算、距离）与个人中心设置的“避雷库”（如不吃香菜/不吃辣），并反向作用于抽奖结果。</p><p>可行性： 高。</p><p>逻辑处理： 这属于标准的后端逻辑过滤，可通过数据库查询时的 NOT IN 或 EXCLUDE 操作实现。</p><p>实时性： 筛选参数（如 2km 以内、25 元以下）可通过前端实时传递至后端进行候选池计算。</p><h4>3. 第三方平台深度集成（核心难点）</h4><p>技术描述： 在最终结果页（SCREEN_4）点击“立即下单”，需直接跳转至美团、饿了么、淘宝或京东等平台的对应商家或菜品详情页。</p><p>可行性： 中等（需特定技术方案）。</p><p>跳转机制： 微信小程序支持使用 wx.navigateToMiniProgram 跳转至其他小程序。</p><p>数据挑战： 获取这些平台的实时菜单和精确的菜品 URL 链接通常需要接入各平台的开放 API（如美团开放平台、联盟 API）或者通过第三方中间件。若无官方接口支持，可能仅能跳转至对应平台的小程序首页或搜索页，无法直接定位到具体菜品。</p><h4>4. 社区与内容管理系统</h4><p>技术描述： 提供美食种草与避雷内容的发布流程（SCREEN_10），包括图片上传、评价与链接提交。</p><p>可行性： 高。</p><p>文件存储： 可使用腾讯云或阿里云的对象存储（OSS/COS）处理用户上传的高清图。</p><p>待开发预留： 流程图中标注的“发布编辑器”属于成熟的 CMS 开发范畴。</p><h3>三、 技术风险评估与对策</h3><h3>四、 结论</h3><div class="insight">从技术角度看，“替你选”小程序的核心功能（随机抽奖、偏好过滤、社区交互）具有很高的开发可行性。项目的最大挑战在于与第三方外卖平台的数据对接和深度跳转路径的打通。</div><p>下一步行动建议：</p><p>确认目标平台（美团/饿了么等）的开发者入驻权限，获取 API 文档。</p><p>建立初步的“美食/标签”数据库结构，以支撑“避雷库”的反向作用逻辑。</p><p>开发 MVP（最小可行性产品）版本，先行测试“摇一摇”与本地固定列表的抽奖流程。</p><a class="back" href="prd.html">← 返回PRD预览</a></div></body></html>
+<div class="hero"><h1>技术可行性分析报告</h1><p>替你选微信小程序</p></div>
+<div class="c">
+<a class="back" href="prd.html">&larr; 返回PRD预览</a>
+<h1>“替你选”小程序技术可行性说明书</h1>
+<h3>一、 技术架构概述</h3>
+<p>根据项目流程图，系统主要由前端展示层（微信小程序）、核心业务逻辑层（抽奖算法与筛选）、数据存储层（用户偏好与避雷库）以及第三方集成接口组成。</p>
+<h3>二、 核心模块可行性分析</h3>
+<h4>1. 抽奖与动画交互模块</h4>
+<p>技术描述： 实现从首页（SCREEN_33）跳转至筛选页，并展示“大转盘”或“老虎机”形式的抽奖动画（SCREEN_39）。</p>
+<p>可行性： 极高。</p>
+<p>交互实现： 微信小程序原生支持 Canvas 或 CSS3 动画，能够流畅实现大转盘或老虎机视觉效果。</p>
+<p>传感器调用： 流程图提到的“摇一摇”功能（开启摇摇传感器）可通过微信小程序的 wx.onAccelerometerChange 接口监听加速度计数据，触发随机抽取逻辑。</p>
+<h4>2. “避雷”驱动的动态抽奖算法</h4>
+<p>技术描述： 系统需整合用户即时筛选条件（分类、预算、距离）与个人中心设置的“避雷库”（如不吃香菜/不吃辣），并反向作用于抽奖结果。</p>
+<p>可行性： 高。</p>
+<p>逻辑处理： 这属于标准的后端逻辑过滤，可通过数据库查询时的 NOT IN 或 EXCLUDE 操作实现。</p>
+<p>实时性： 筛选参数（如 2km 以内、25 元以下）可通过前端实时传递至后端进行候选池计算。</p>
+<h4>3. 第三方平台深度集成（核心难点）</h4>
+<p>技术描述： 在最终结果页（SCREEN_4）点击“立即下单”，需直接跳转至美团、饿了么、淘宝或京东等平台的对应商家或菜品详情页。</p>
+<p>可行性： 中等（需特定技术方案）。</p>
+<p>跳转机制： 微信小程序支持使用 wx.navigateToMiniProgram 跳转至其他小程序。</p>
+<p>数据挑战： 获取这些平台的实时菜单和精确的菜品 URL 链接通常需要接入各平台的开放 API（如美团开放平台、联盟 API）或者通过第三方中间件。若无官方接口支持，可能仅能跳转至对应平台的小程序首页或搜索页，无法直接定位到具体菜品。</p>
+<h4>4. 社区与内容管理系统</h4>
+<p>技术描述： 提供美食种草与避雷内容的发布流程（SCREEN_10），包括图片上传、评价与链接提交。</p>
+<p>可行性： 高。</p>
+<p>文件存储： 可使用腾讯云或阿里云的对象存储（OSS/COS）处理用户上传的高清图。</p>
+<p>待开发预留： 流程图中标注的“发布编辑器”属于成熟的 CMS 开发范畴。</p>
+<h3>三、 技术风险评估与对策</h3>
+<h3>四、 结论</h3>
+<p>从技术角度看，“替你选”小程序的核心功能（随机抽奖、偏好过滤、社区交互）具有很高的开发可行性。项目的最大挑战在于与第三方外卖平台的数据对接和深度跳转路径的打通。</p>
+<p>下一步行动建议：</p>
+<p>确认目标平台（美团/饿了么等）的开发者入驻权限，获取 API 文档。</p>
+<p>建立初步的“美食/标签”数据库结构，以支撑“避雷库”的反向作用逻辑。</p>
+<p>开发 MVP（最小可行性产品）版本，先行测试“摇一摇”与本地固定列表的抽奖流程。</p>
+<a class="back" href="prd.html">&larr; 返回PRD预览</a>
+</div>
+</body>
+</html>

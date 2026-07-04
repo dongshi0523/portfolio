@@ -3,31 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>核心逻辑与架构说明书 - 替你选</title>
+<title>核心逻辑与架构说明书V2</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',-apple-system,"PingFang SC",sans-serif;background:#fafafa;color:#1a1a1a;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#fafafa;color:#1a1a1a;line-height:1.8}
 .hero{background:#0a0a0a;color:white;padding:40px 24px 30px;text-align:center}
 .hero h1{font-size:18pt;font-weight:600}
 .hero p{font-size:10pt;color:#888;margin-top:6px}
-.container{max-width:720px;margin:0 auto;padding:30px 24px 60px}
+.c{max-width:720px;margin:0 auto;padding:30px 24px 60px}
 .back{display:inline-block;margin:16px 0;font-size:10pt;color:#3b82f6;text-decoration:none}
 .back:hover{text-decoration:underline}
-h2{font-size:14pt;font-weight:600;color:#1a5c8a;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid #1a5c8a}
-h3{font-size:12pt;font-weight:600;margin:18px 0 8px;color:#333}
-h4{font-size:11pt;font-weight:600;margin:14px 0 6px;color:#555}
-p{font-size:10pt;line-height:1.8;margin:5px 0;color:#444}
-ul{margin:5px 0 5px 18px}
-li{font-size:10pt;line-height:1.7;margin:3px 0;color:#444}
-pre{font-family:monospace;font-size:9pt;background:#f5f5f5;padding:12px 16px;border-radius:8px;margin:10px 0;overflow-x:auto;line-height:1.5;white-space:pre-wrap}
-.insight{background:#f0f6ff;border-left:4px solid #1a5c8a;padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:10pt}
-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:9pt}
+h1{font-size:18pt;font-weight:700;margin:24px 0 12px}
+h2{font-size:15pt;font-weight:600;color:#1a5c8a;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid #1a5c8a}
+h3{font-size:13pt;font-weight:600;margin:20px 0 8px}
+h4{font-size:11pt;font-weight:600;margin:16px 0 6px}
+p{font-size:10pt;margin:4px 0}
+ul,ol{margin:4px 0 4px 20px}
+li{font-size:10pt;margin:2px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:9pt}
 th{background:#1a5c8a;color:white;padding:6px 8px;text-align:left}
 td{padding:5px 8px;border-bottom:1px solid #eee}
+.tree{font-family:monospace;font-size:9pt;background:#f5f5f5;padding:12px 16px;border-radius:8px;margin:10px 0;white-space:pre-wrap;line-height:1.5}
 </style>
 </head>
 <body>
-<div class="hero"><h1>核心逻辑与架构说明书</h1><p>「替你选」微信小程序</p></div>
-<div class="container">
-<h1>“替你选”小程序核心逻辑与架构说明书 V2</h1><h2>一、 产品概述与核心定位</h2><p>“替你选”是一款旨在帮助用户（主要为00后大学生和上班族）解决“吃什么”决策困难的微信小程序。通过硬性筛选、个性化偏好过滤以及随机加权算法，将繁琐的选择过程转化为带有盲盒惊喜感的抽奖体验，从而大幅缩短用户的决策和思考时间。</p><h2>二、 核心业务流程 (User Journey)</h2><p>系统的主干业务主要分为两条抽奖路径，最终汇聚于外卖平台的下单转化：</p><p>常规精准抽取路径： 首页 (SCREEN_33) → 点击“开始抽取” → 筛选要求页 (SCREEN_20，设置平台、分类、预算、距离) → 点击开始 → 抽奖过渡动画 (SCREEN_39，大转盘/老虎机) → 最终菜品展示页 (SCREEN_4)。</p><p>极简全随机路径（趣味模式）： 首页 (SCREEN_33) → 开启“摇摇”监听 → 摇晃手机触发传感器 → 绕过精细筛选（仅保留营业状态、避雷库、默认5km距离等硬性条件） → 直接进入动画与最终菜品展示。</p><p>结果闭环与转化： 在最终展示页，用户可查看高清图、价格和评价。点击“立即下单”则通过微信小程序 API 跳转至对应的第三方外卖平台（美团/淘宝/京东等）；若点击“不满意？再抽一次”，则返回上一层级重新触发算法。</p><h2>三、 核心引擎：智能抽奖算法逻辑</h2><p>抽奖算法逻辑旨在通过“硬性筛选+偏好过滤+条件放宽+随机加权”四个维度，实现减少用户决策压力并提供惊喜感的目标。</p><h2>四、 辅助支撑与生态构建流程</h2><div class="insight">除了核心抽奖工具属性，系统还设计了内容生态和个人管理模块以增加用户粘性：</div><p>社区互动（种草与避雷）： 发现页 (SCREEN_10) 允许用户浏览全站的“种草”和“踩雷”卡片，查看详情并通过“去试试”反向引流至抽奖或商品页。配套的发布编辑器（待开发预留）支持上传图片、评价，构建UGC生态。</p><div class="insight">个人中心与反向控制 (SCREEN_11)： 个人中心不仅用于查看足迹和反馈建议，最核心的逻辑在于“个性化偏好设置”。用户在此处维护的“避雷库”作为底层数据支撑，反向且强制地作用于核心业务流程中的抽奖算法，形成产品的核心壁垒。</div><h2>五、 潜在技术风险与对策</h2><p>根据架构评估，该逻辑落地的主要挑战在于第三方交互：</p><p>第三方平台跳转： 终极页需跳转美团等平台，获取实时的菜品URL是难点。若无深度API，可能需要回退至跳转小程序首页或搜索结果页。建议初期通过CPS接口获取数据。</p><p>性能与LBS精度： “避雷库”规则增多可能导致算法延迟，建议使用 Redis 缓存热门区域数据；同时需利用微信原生高精度定位接口以保证“距离筛选”的有效性。</p><a class="back" href="prd.html">← 返回PRD预览</a></div></body></html>
+<div class="hero"><h1>核心逻辑与架构说明书V2</h1><p>替你选微信小程序</p></div>
+<div class="c">
+<a class="back" href="prd.html">&larr; 返回PRD预览</a>
+<h1>“替你选”小程序核心逻辑与架构说明书 V2</h1>
+<h2>一、 产品概述与核心定位</h2>
+<p>“替你选”是一款旨在帮助用户（主要为00后大学生和上班族）解决“吃什么”决策困难的微信小程序。通过硬性筛选、个性化偏好过滤以及随机加权算法，将繁琐的选择过程转化为带有盲盒惊喜感的抽奖体验，从而大幅缩短用户的决策和思考时间。</p>
+<h2>二、 核心业务流程 (User Journey)</h2>
+<p>系统的主干业务主要分为两条抽奖路径，最终汇聚于外卖平台的下单转化：</p>
+<p>常规精准抽取路径： 首页 (SCREEN_33) → 点击“开始抽取” → 筛选要求页 (SCREEN_20，设置平台、分类、预算、距离) → 点击开始 → 抽奖过渡动画 (SCREEN_39，大转盘/老虎机) → 最终菜品展示页 (SCREEN_4)。</p>
+<p>极简全随机路径（趣味模式）： 首页 (SCREEN_33) → 开启“摇摇”监听 → 摇晃手机触发传感器 → 绕过精细筛选（仅保留营业状态、避雷库、默认5km距离等硬性条件） → 直接进入动画与最终菜品展示。</p>
+<p>结果闭环与转化： 在最终展示页，用户可查看高清图、价格和评价。点击“立即下单”则通过微信小程序 API 跳转至对应的第三方外卖平台（美团/淘宝/京东等）；若点击“不满意？再抽一次”，则返回上一层级重新触发算法。</p>
+<h2>三、 核心引擎：智能抽奖算法逻辑</h2>
+<p>抽奖算法逻辑旨在通过“硬性筛选+偏好过滤+条件放宽+随机加权”四个维度，实现减少用户决策压力并提供惊喜感的目标。</p>
+<h2>四、 辅助支撑与生态构建流程</h2>
+<p>除了核心抽奖工具属性，系统还设计了内容生态和个人管理模块以增加用户粘性：</p>
+<p>社区互动（种草与避雷）： 发现页 (SCREEN_10) 允许用户浏览全站的“种草”和“踩雷”卡片，查看详情并通过“去试试”反向引流至抽奖或商品页。配套的发布编辑器（待开发预留）支持上传图片、评价，构建UGC生态。</p>
+<p>个人中心与反向控制 (SCREEN_11)： 个人中心不仅用于查看足迹和反馈建议，最核心的逻辑在于“个性化偏好设置”。用户在此处维护的“避雷库”作为底层数据支撑，反向且强制地作用于核心业务流程中的抽奖算法，形成产品的核心壁垒。</p>
+<h2>五、 潜在技术风险与对策</h2>
+<p>根据架构评估，该逻辑落地的主要挑战在于第三方交互：</p>
+<p>第三方平台跳转： 终极页需跳转美团等平台，获取实时的菜品URL是难点。若无深度API，可能需要回退至跳转小程序首页或搜索结果页。建议初期通过CPS接口获取数据。</p>
+<p>性能与LBS精度： “避雷库”规则增多可能导致算法延迟，建议使用 Redis 缓存热门区域数据；同时需利用微信原生高精度定位接口以保证“距离筛选”的有效性。</p>
+<a class="back" href="prd.html">&larr; 返回PRD预览</a>
+</div>
+</body>
+</html>
