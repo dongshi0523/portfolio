@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「替你选」小程序 — 文档预览</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  }
+  .container {
+    background: #fff; border-radius: 16px; padding: 48px 40px; max-width: 500px;
+    width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); text-align: center;
+  }
+  h1 { font-size: 24px; color: #1a1a1a; margin-bottom: 8px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 32px; }
+  .card {
+    display: block; background: #f8f9fb; border: 1px solid #e8e8e8; border-radius: 10px;
+    padding: 16px 20px; margin: 10px 0; text-decoration: none; text-align: left;
+    transition: all 0.2s;
+  }
+  .card:hover { border-color: #2563eb; box-shadow: 0 4px 12px rgba(37,99,235,0.1); }
+  .card .icon { font-size: 20px; margin-right: 10px; }
+  .card .title { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+  .card .desc { font-size: 12px; color: #888; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📋 「替你选」文档预览</h1>
+  <p class="subtitle">微信小程序 · 产品需求文档及附件</p>
+  <a href="prd.html" class="card">
+    <span class="icon">📄</span>
+    <span class="title">PRD 文档</span>
+    <div class="desc">完整产品需求文档（含内嵌文档跳转）</div>
+  </a>
+  <a href="embedded_1.html" class="card">
+    <span class="icon">⚙️</span>
+    <span class="title">抽奖引擎算法架构方案书</span>
+    <div class="desc">多级过滤与动态权重分配算法</div>
+  </a>
+  <a href="embedded_5.html" class="card">
+    <span class="icon">📐</span>
+    <span class="title">核心逻辑与架构说明书 V2</span>
+    <div class="desc">产品核心定位与业务架构</div>
+  </a>
+  <a href="embedded_6.html" class="card">
+    <span class="icon">🔧</span>
+    <span class="title">技术可行性说明书</span>
+    <div class="desc">技术架构与实现方案分析</div>
+  </a>
+  <a href="embedded_2.html" class="card">
+    <span class="icon">🖼️</span>
+    <span class="title">原型设计 - 首页</span>
+    <div class="desc">PDF 原型设计稿</div>
+  </a>
+  <a href="embedded_3.html" class="card">
+    <span class="icon">🖼️</span>
+    <span class="title">原型设计 - 发现页</span>
+    <div class="desc">PDF 原型设计稿</div>
+  </a>
+  <a href="embedded_4.html" class="card">
+    <span class="icon">🖼️</span>
+    <span class="title">原型设计 - 个人中心</span>
+    <div class="desc">PDF 原型设计稿</div>
+  </a>
+</div>
+</body>
+</html>

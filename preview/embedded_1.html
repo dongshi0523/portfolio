@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「替你选」抽奖引擎算法架构方案书</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: #333;
+    background: #f8f9fb;
+    line-height: 1.8;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 24px 110px;
+  }
+  h1 { font-size: 28px; margin: 36px 0 24px; color: #1a1a1a; border-bottom: 2px solid #2563eb; padding-bottom: 14px; }
+  h2 { font-size: 24px; margin: 32px 0 18px; color: #1a1a1a; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px; }
+  h3 { font-size: 20px; margin: 26px 0 14px; color: #2c2c2c; }
+  h4 { font-size: 17px; margin: 20px 0 10px; color: #3a3a3a; }
+  p { margin: 8px 0; font-size: 15px; }
+  .list-item { font-size: 15px; }
+  table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 14px; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  table th, table td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: left; vertical-align: top; }
+  table th { background: #f0f4f8; font-weight: 600; color: #1a1a1a; }
+  table tr:nth-child(even) td { background: #fafbfc; }
+  strong, b { color: #1a1a1a; font-weight: 600; }
+  .image-container { text-align: center; margin: 24px 0; }
+  .image-container img { max-width: 100%; height: auto; border: 1px solid #e8e8e8; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .embedded-docs {
+    background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 8px;
+    padding: 14px 18px; margin: 16px 0; font-size: 14px; color: #3730a3;
+  }
+  .embedded-docs a {
+    color: #4338ca; text-decoration: none; font-weight: 600;
+    padding: 2px 6px; border-radius: 4px; transition: background 0.2s;
+  }
+  .embedded-docs a:hover { background: #ddd6fe; text-decoration: underline; }
+  .pdf-preview {
+    text-align: center; margin: 24px 0; padding: 20px;
+    border: 2px dashed #d0d0d0; border-radius: 8px; background: #fafafa;
+  }
+  .pdf-preview a {
+    color: #dc2626; font-size: 16px; font-weight: 600; text-decoration: none;
+    display: inline-block; padding: 10px 20px; border: 2px solid #dc2626;
+    border-radius: 6px; transition: all 0.2s;
+  }
+  .pdf-preview a:hover { background: #dc2626; color: #fff; }
+  .pdf-preview img { max-width: 100%; margin-top: 16px; border: 1px solid #e0e0e0; border-radius: 4px; }
+  .back-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #fff; border-top: 1px solid #e0e0e0;
+    padding: 12px 24px; text-align: center; z-index: 1000;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  }
+  .back-bar a {
+    display: inline-block; background: #2563eb; color: #fff;
+    padding: 8px 28px; border-radius: 20px; text-decoration: none;
+    font-size: 14px; font-weight: 500; transition: all 0.2s;
+  }
+  .back-bar a:hover { background: #1d4ed8; }
+  .back-bar span { color: #666; font-size: 13px; margin: 0 12px; }
+  @media print {
+    body { max-width: 100%; padding: 20px; background: #fff; }
+    table { page-break-inside: avoid; }
+    .back-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+<h1>「替你选」抽奖引擎算法架构方案书</h1>
+<h1>“替你选”抽奖引擎：多级过滤与动态权重分配算法架构方案书</h1>
+<h2>1. 算法设计背景与战略目标</h2>
+<p>在针对00后大学生及年轻上班族的餐饮决策场景中，核心痛点并非“缺乏选择”，而是由信息过载引发的“决策熵”激增。作为架构设计者，我们将“替你选”算法定位为一种<strong>转化路径优化引擎</strong>。</p>
+<p>通过将复杂的第三方平台（美团、饿了么等）异构数据转化为“盲盒式”抽奖体验，算法旨在实现用户决策成本的最小化。相较于传统列表筛选模式带来的认知负载，“盲盒”逻辑利用了行为心理学中的偶然性奖励机制，显著降低了决策摩擦。从战略维度看，该架构不仅是提升用户留存的工具，更是通过实时计算确保链路闭环的核心。我们将复杂的后台逻辑封装在极简的交互之下，旨在实现从“随机筛选”到“精准预测”的闭环迭代。</p>
+<p><strong>连接语：</strong> 在明确了算法的业务逻辑基础后，方案将深入探讨其第一道防线：底层硬性过滤机制。</p>
+<h2>2. 第一层级：硬性过滤机制 (Hard Filtering)</h2>
+<p>硬性过滤是算法的“物理红线”，其核心目标是在海量原始数据流中通过确定性规则清洗出“可用候选池”，确保推荐结果在逻辑上是百分之百可转化的。</p>
+<h3>2.1 核心红线指标</h3>
+<p>系统将以下三个维度视为绝对红线，具备最高优先级且在任何情况下不可放宽：</p>
+<p><strong>营业与售罄状态（Operating &amp; Stock Status）：</strong> 实时调用商家状态API，强制过滤处于“非营业时间”或目标菜品状态为“售罄（Sold Out）”的记录。</p>
+<p><strong>配送覆盖限制（LBS Range）：</strong> 剔除地理位置上超出了当前配送能力的商家，防止无效曝光。</p>
+<p><strong>个人避雷库拦截（User Avoidance Filter）：</strong> 匹配用户预设的负面偏好（如“不吃香菜”、“拒绝某品牌”），执行底层关键词拦截。</p>
+<h3>2.2 常规参数处理逻辑</h3>
+<p>根据用户触发模式，算法采用差异化的过滤参数：</p>
+<table><tr><th>过滤参数</th><th>精准抽取模式 (SCREEN_20)</th><th>“摇一摇”随机模式</th><th>逻辑说明</th></tr><tr><td><strong>配送距离</strong></td><td>用户自定义 (如 1km, 2km)</td><td><strong>默认 5km 强制限制</strong></td><td>摇一摇侧重广域探索</td></tr><tr><td><strong>预算区间</strong></td><td>用户手动设定 (如 20-35元)</td><td><strong>忽略设置 (完全随机)</strong></td><td>减少摩擦，增强盲盒感</td></tr><tr><td><strong>品类筛选</strong></td><td>用户指定分类</td><td><strong>忽略设置 (全品类)</strong></td><td>强化“随缘”趣味性</td></tr><tr><td><strong>三大红线</strong></td><td><strong>强制执行</strong></td><td><strong>强制执行</strong></td><td>兜底可用性的终极防线</td></tr></table>
+<h3>2.3 “So What?” 深度分析</h3>
+<p>在第一步即引入“营业状态”与“售罄状态”的双重拦截，是为了彻底消除用户在完成抽奖动画后发现“无法下单”的负面心理落差。这种架构设计将预校验前置，保证了后续权重分配阶段的每一个候选对象都是高价值的实时可下单标的，极大增强了系统的可靠性。</p>
+<p><strong>连接语：</strong> 尽管硬性过滤保证了结果的“对”，但在极端筛选条件下可能导致结果集为空，这就需要第二层级所述的补偿策略进行动态干预。</p>
+<h2>3. 第二层级：条件自动放宽与补偿策略 (Fallback Strategy)</h2>
+<p>算法必须平衡“筛选精准度”与“结果可用性”。补偿机制的设计核心在于：宁可提供稍微超出预期的选项，也不向用户输出“无结果”的系统报错。</p>
+<h3>3.1 触发阈值定义</h3>
+<p>当第一层级过滤后的候选池结果数量 <strong>N &lt; 3</strong> 时，算法自动进入补偿流程。</p>
+<h3>3.2 放宽优先级矩阵（有序列表）</h3>
+<p>系统严格按照以下权重顺序进行步进式放宽：</p>
+<p><strong>分类限制放宽：</strong> 将具体的菜品子类目扩大至父级。例如，若“川菜-口水鸡”无结果，则自动扩展至“川菜”全类目，甚至“中餐”大类。</p>
+<p><strong>预算限制放宽：</strong> 在用户原设定金额的基础上，允许向上浮动 <strong>10%-20%</strong>。这是基于00后群体对价格敏感但对高品质商品有一定溢价容忍度的洞察。</p>
+<p><strong>距离限制放宽：</strong> 以 <strong>1-2km</strong> 为梯度步进式增加配送范围，直至触发全局 5km 软上限。</p>
+<h3>3.3 兜底红线重申</h3>
+<p><strong>强制架构约束：</strong> 无论补偿机制如何运作，**“营业状态”、“售罄状态”<strong>与</strong>“个人避雷库”**在任何模式下均不可放宽。若放宽上述三项后仍无解，则输出全局兜底推荐。</p>
+<p><strong>连接语：</strong> 在确保了候选池具备足够数量后，算法将进入第三阶段：通过多维权重分配实现智能排序。</p>
+<h2>4. 第三层级：动态权重计算引擎 (Weight Scoring)</h2>
+<p>动态权重分配是实现“智能匹配”的核心，它通过将静态标签转化为实时分值，实现从“选得出”到“选得好”的跃升。</p>
+<h3>4.1 多维评分体系</h3>
+<p>算法对候选池进行实时的加减分运算（Scoring）：</p>
+<p><strong>正向加分（Rewards）：</strong></p>
+<p><strong>社区种草加权：</strong> 发现页中获得高频点击与好评的“种草”标签。</p>
+<p><strong>历史行为对齐：</strong> 用户过往在Session中多次点击立即下单的类似分类。</p>
+<p><strong>时段适配性：</strong> 结合LBS时间戳进行场景化加权（如深夜22点后调高“宵夜/奶茶”权重）。</p>
+<p><strong>负向减分（Penalties）：</strong></p>
+<p><strong>社区踩雷回流：</strong> 全局社区反馈中“踩雷”次数较多的商家。</p>
+<p><strong>当前会话负反馈：</strong> 记录用户在当前Session中点击“不满意”的操作。</p>
+<h3>4.2 “So What?” 深度分析：构建产品护城河</h3>
+<p>这种以“避雷库”为核心的数据驱动模式，正在构建产品的<strong>专有数据资产壁垒</strong>。由于美团等传统外卖平台其商业模式优先服务于商家的曝光量（B端优先级），往往难以深度沉淀用户个人的细微避雷数据。随着用户在“替你选”中不断完善避雷名单，算法将产生极强的粘性与切换成本。这种“比你更懂你讨厌什么”的特质，形成了竞品难以通过简单接口复制的技术护城河。</p>
+<p><strong>连接语：</strong> 权重分配确保了初次抽奖的质量，而实时负反馈机制则保证了单次会话中的用户耐受度。</p>
+<h2>5. 交互负反馈机制与会话管理 (Negative Feedback Loop)</h2>
+<p>为维持抽奖过程中的“新鲜感”并避免算法产生机械性重复，系统引入了基于状态的会话管理。</p>
+<h3>5.1 “不满意，再抽一次”逻辑</h3>
+<p>当用户触发此指令时，系统将该次结果及其对应的细分标签在当前 <strong>Stateful Session（有状态会话）</strong> 中的权重立即置为 <strong>0</strong>。</p>
+<p><strong>技术实现：</strong> 采用 <strong>Redis-backed 临时 Session</strong>，设定 TTL（生存时间）为30分钟。用户在短时间内的连续抽取将不会出现同质化结果，从而引导用户探索候选池中的长尾选项。</p>
+<h3>5.2 随机强度策略</h3>
+<p><strong>常规抽取模式：</strong> 采用**伪随机（Pseudo-random）**算法，旨在权重排序的基础上引入扰动因子，平衡“预判性”与“惊喜感”。</p>
+<p><strong>摇一摇模式：</strong> 触发**强随机（True Random）**策略，系统大幅削减个人历史偏好权重，仅保留“三大红线”，最大化随机性带来的刺激感。</p>
+<p><strong>连接语：</strong> 逻辑层的完善需要严密的技术架构支撑以应对生产环境的挑战。</p>
+<h2>6. 技术实施细节与架构对策 (Implementation & Risks)</h2>
+<h3>6.1 性能优化策略（基于 Redis）</h3>
+<p>由于“避雷库”涉及大量复杂的字符串匹配及关联查询，为避免算法延迟导致的卡顿，我们采取以下方案：</p>
+<p><strong>Geohash 预加载缓存：</strong> 以用户地理位置的 Geohash 为 Key，将该区域内高频商家的基础营业数据缓存至 Redis。</p>
+<p><strong>异步计算与预判：</strong> 在用户进入筛选页（SCREEN_20）时，后台预先触发候选池初选，将延迟控制在毫秒级。</p>
+<h3>6.2 第三方集成与 Middleware 方案</h3>
+<p>针对微信小程序 API 跳转美团/饿了么的路径，主要挑战在于实时菜品 URL 的有效性。</p>
+<p><strong>CPS 代理层架构：</strong> 建立一个 <strong>Middleware Proxy</strong> 层，集中处理抽奖结果到 CPS 落地页的转换。若实时深度链接（Deep Link）失效，中间层将自动降级跳转至平台的商家搜索页或小程序首页，防止链路中断。</p>
+<h3>6.3 LBS 精度管理</h3>
+<p><strong>坐标微调逻辑：</strong> 针对商户在平台标注的经纬度误差，系统支持后台人工/算法自动微调坐标偏移量，确保配送距离筛选的物理有效性。</p>
+<p><strong>微信原生调用：</strong> 采用微信最高精度定位接口，确保在校园、写字楼等高密度场景下的定位准确。</p>
+<h3>结论性总结</h3>
+<p>本方案通过“硬性过滤兜底可用性、Fallback 机制保障输出率、动态权重驱动智能化”的三层联动架构，成功将复杂的外卖决策熵减过程转化为高效的闭环闭合。这不仅是一次算法的工程实践，更是通过积累用户避雷数据，构建高壁垒、低决策成本产品价值的核心技术支撑。</p>
+
+<div class="back-bar">
+  <a href="prd.html">← 返回PRD文档</a>
+  <span>「替你选」微信小程序</span>
+</div>
+
+</body>
+</html>
