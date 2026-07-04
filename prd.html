@@ -13,13 +13,14 @@
     line-height: 1.8;
     max-width: 920px;
     margin: 0 auto;
-    padding: 40px 24px 100px;
+    padding: 40px 24px 110px;
   }
   h1 { font-size: 28px; margin: 36px 0 24px; color: #1a1a1a; border-bottom: 2px solid #2563eb; padding-bottom: 14px; }
   h2 { font-size: 24px; margin: 32px 0 18px; color: #1a1a1a; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px; }
   h3 { font-size: 20px; margin: 26px 0 14px; color: #2c2c2c; }
   h4 { font-size: 17px; margin: 20px 0 10px; color: #3a3a3a; }
   p { margin: 8px 0; font-size: 15px; }
+  .list-item { font-size: 15px; }
   table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 14px; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
   table th, table td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: left; vertical-align: top; }
   table th { background: #f0f4f8; font-weight: 600; color: #1a1a1a; }
@@ -31,32 +32,33 @@
     background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 8px;
     padding: 14px 18px; margin: 16px 0; font-size: 14px; color: #3730a3;
   }
-  .ole-link {
+  .embedded-docs a {
     color: #4338ca; text-decoration: none; font-weight: 600;
     padding: 2px 6px; border-radius: 4px; transition: background 0.2s;
   }
-  .ole-link:hover { background: #ddd6fe; text-decoration: underline; }
-  .back-btn {
-    position: fixed; bottom: 24px; right: 24px;
-    background: #2563eb; color: #fff; border: none; border-radius: 50%;
-    width: 48px; height: 48px; font-size: 20px; cursor: pointer;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.3); z-index: 1000;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
+  .embedded-docs a:hover { background: #ddd6fe; text-decoration: underline; }
+  .back-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #fff; border-top: 1px solid #e0e0e0;
+    padding: 12px 24px; text-align: center; z-index: 1000;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
   }
-  .back-btn:hover { background: #1d4ed8; transform: scale(1.05); }
-  .back-btn a { color: #fff; text-decoration: none; }
+  .back-bar a {
+    display: inline-block; background: #2563eb; color: #fff;
+    padding: 8px 28px; border-radius: 20px; text-decoration: none;
+    font-size: 14px; font-weight: 500; transition: all 0.2s;
+  }
+  .back-bar a:hover { background: #1d4ed8; }
+  .back-bar span { color: #666; font-size: 13px; margin: 0 12px; }
   @media print {
     body { max-width: 100%; padding: 20px; background: #fff; }
     table { page-break-inside: avoid; }
-    .back-btn { display: none; }
+    .back-bar { display: none; }
   }
 </style>
 </head>
 <body>
 <h2>「替你选」微信小程序 — PRD文档</h2>
-<div style="text-align:right;margin-bottom:8px;"><a href="preview/index.html" style="font-size:13px;color:#2563eb;text-decoration:none;">📋 查看完整预览站 →</a></div>
-
 <h3>一、 文档概述</h3>
 <h4>1.1 版本修订记录</h4>
 <table><tr><th><strong>版本号</strong></th><th><strong>修订日期</strong></th><th><strong>修订内容</strong></th><th><strong>修订人</strong></th></tr><tr><td>V1.0</td><td>2026-05-12</td><td>初版编写</td><td>董事</td></tr></table>
@@ -66,15 +68,15 @@
 <h4>2.1 产品定位</h4>
 <p>一款帮助00后大学生和上班族解决"吃什么"决策困难的微信小程序——通过硬性筛选 + 个性化避雷 + 随机加权算法，将选择焦虑转化为盲盒式抽奖体验。</p>
 <h4>2.2 需求背景与市场机会</h4>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户痛点</strong>：外卖平台SKU爆炸，用户每天面对"吃什么"的选择疲劳，决策时间过长；</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>市场空白</strong>：现有外卖平台强调"搜索"和"浏览"，缺少专门针对"决策困难群体"的轻量工具；</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>行为趋势</strong>：盲盒、随机抽奖类玩法在Z世代中接受度极高，将"选择困难"转化为"惊喜体验"存在心理契合点。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户痛点</strong>：外卖平台SKU爆炸，用户每天面对"吃什么"的选择疲劳，决策时间过长；</p>
+<p class="list-item" style="margin-left:20px;">• <strong>市场空白</strong>：现有外卖平台强调"搜索"和"浏览"，缺少专门针对"决策困难群体"的轻量工具；</p>
+<p class="list-item" style="margin-left:20px;">• <strong>行为趋势</strong>：盲盒、随机抽奖类玩法在Z世代中接受度极高，将"选择困难"转化为"惊喜体验"存在心理契合点。</p>
 <h4>2.3 目标用户画像</h4>
 <p><strong>核心用户群</strong>：00后大学生 + 初入职场上班族</p>
 <table><tr><th><strong>维度</strong></th><th><strong>描述</strong></th></tr><tr><td>年龄范围</td><td>18-26岁</td></tr><tr><td>经济水平</td><td>月生活费2k以下（学生）/ 月薪6k以下（上班族）</td></tr><tr><td>核心特征</td><td>对饮食有一定要求但选择困难，习惯外卖消费，对轻量工具接受度高</td></tr><tr><td>使用场景</td><td>午/晚饭前打开小程序，希望快速得到"今天吃什么"的答案</td></tr></table>
 <p><strong>用户故事示例</strong>：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• *用户故事1*：小张，大二学生，每天中午打开外卖App刷20分钟不知道吃什么，最后经常将就点同一家。—— 他需要的是一个10秒内帮他做决定的工具。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• *用户故事2*：小李，毕业一年的上班族，加班后不想思考晚饭，但又有忌口（不吃香菜、不吃辣），希望有个工具即"懂他的雷区"又能快速推荐。</p>
+<p class="list-item" style="margin-left:20px;">• *用户故事1*：小张，大二学生，每天中午打开外卖App刷20分钟不知道吃什么，最后经常将就点同一家。—— 他需要的是一个10秒内帮他做决定的工具。</p>
+<p class="list-item" style="margin-left:20px;">• *用户故事2*：小李，毕业一年的上班族，加班后不想思考晚饭，但又有忌口（不吃香菜、不吃辣），希望有个工具即"懂他的雷区"又能快速推荐。</p>
 <h4>2.4 产品核心价值主张</h4>
 <table><tr><th><strong>用户痛点</strong></th><th><strong>替选方案</strong></th></tr><tr><td>外卖选择过多，决策疲劳</td><td>算法代劳，一键抽取，3秒出结果</td></tr><tr><td>抽到的可能是不喜欢/忌口的</td><td>个人避雷库强制拦截，结果可控</td></tr><tr><td>纯工具用完即走，留存低</td><td>社区种草/踩雷 UGC 生态增强粘性</td></tr><tr><td>传统推荐缺乏惊喜感</td><td>盲盒式随机抽取 + 动画反馈</td></tr></table>
 <h3>三、 产品架构</h3>
@@ -94,18 +96,19 @@
 <p>    ├── 个性化偏好设置</p>
 <p>    └── 反馈与建议</p>
 <h4>3.2 核心业务流程图</h4>
-<div class="image-container"><img src="images/img_rId6.png" alt="图片" loading="lazy"></div>
+<div class="image-container"><img src="preview/images/img_prd_rId6.png" alt="图片" loading="lazy"></div>
 <p><strong>两条主路径说明</strong>：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>路径A（常规模式）</strong>：首页 → 筛选要求页（选平台/分类/预算/距离）→ 抽奖动画 → 结果页 → 跳转美团/饿了么下单</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>路径B（趣味模式）</strong>：首页 → 摇一摇 → 绕过精细筛选（仅保留营业状态+避雷库+默认5km）→ 动画 → 结果页</p>
+<p class="list-item" style="margin-left:20px;">• <strong>路径A（常规模式）</strong>：首页 → 筛选要求页（选平台/分类/预算/距离）→ 抽奖动画 → 结果页 → 跳转美团/饿了么下单</p>
+<p class="list-item" style="margin-left:20px;">• <strong>路径B（趣味模式）</strong>：首页 → 摇一摇 → 绕过精细筛选（仅保留营业状态+避雷库+默认5km）→ 动画 → 结果页</p>
 <h3>四、 核心引擎：智能抽奖算法（重点展示章节）</h3>
+<div class="embedded-docs">📎 内嵌文档：<a href="preview/embedded_1.html">「替你选」抽奖引擎算法架构方案书 →</a></div>
 <h4>4.1 算法设计原则</h4>
 <p>解决的核心矛盾：<strong>在保证结果"可接受"的前提下最小化用户决策成本，同时保留惊喜感。</strong></p>
 <h4>4.2 四阶段执行流程</h4>
 <p><strong>第一阶段：硬性过滤（Hard Filtering）</strong></p>
 <p>两条不可动摇的红线，所有后续逻辑的基础保障：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>营业状态过滤</strong>：自动剔除未营业/已售罄商家（对接商家状态API）</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>避雷库拦截</strong>：根据用户个人中心维护的关键词（如"香菜""不吃辣""不要海鲜"），强制过滤匹配菜品</p>
+<p class="list-item" style="margin-left:20px;">• <strong>营业状态过滤</strong>：自动剔除未营业/已售罄商家（对接商家状态API）</p>
+<p class="list-item" style="margin-left:20px;">• <strong>避雷库拦截</strong>：根据用户个人中心维护的关键词（如"香菜""不吃辣""不要海鲜"），强制过滤匹配菜品</p>
 <p>外加用户即时设置的软性参数：配送距离上限、预算价格区间。</p>
 <p><strong>第二阶段：条件自动放宽（Fallback Strategy）</strong></p>
 <p>触发条件：候选池结果 &lt; 3个 或为 0。</p>
@@ -115,9 +118,9 @@
 <p>对放宽后的候选池中每个结果进行综合打分：</p>
 <table><tr><th><strong>影响方向</strong></th><th><strong>权重因子</strong></th><th><strong>数据来源</strong></th></tr><tr><td>加分</td><td>社区"种草"数高</td><td>社区UGC数据</td></tr><tr><td>加分</td><td>用户历史足迹中点赞过的分类</td><td>用户行为数据</td></tr><tr><td>加分</td><td>符合当前时段的热门品类</td><td>时段-品类关联</td></tr><tr><td>减分</td><td>社区"踩雷"反馈多</td><td>社区UGC数据</td></tr><tr><td>减分</td><td>近期用户频繁点击"不满意"</td><td>Session行为数据</td></tr><tr><td>加分</td><td>用户历史订单中多次（&gt;=3次）出现的分类</td><td>用户历史订单数据</td></tr></table>
 <p><strong>第四阶段：随机触发与负反馈</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 在高权重候选池中执行伪随机抽取</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 若用户点击"不满意，再抽一次"，将刚抽中的结果及其同类标签在当前Session中的权重暂时降为零</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 实现类似"摇一摇换一批"的流畅连续体验</p>
+<p class="list-item" style="margin-left:20px;">• 在高权重候选池中执行伪随机抽取</p>
+<p class="list-item" style="margin-left:20px;">• 若用户点击"不满意，再抽一次"，将刚抽中的结果及其同类标签在当前Session中的权重暂时降为零</p>
+<p class="list-item" style="margin-left:20px;">• 实现类似"摇一摇换一批"的流畅连续体验</p>
 <h4>4.3 避雷库：产品的反向控制壁垒</h4>
 <p>这是产品区别于普通随机工具的核心差异化设计。避雷库不是简单的黑名单过滤，而是一个<strong>持续生长的个性化数据资产</strong>——用户维护得越久，推荐越精准，迁移成本越高，天然形成留存壁垒。</p>
 <h3>五、 功能需求详述</h3>
@@ -125,66 +128,67 @@
 <table><tr><th><strong>功能模块</strong></th><th><strong>优先级</strong></th><th><strong>说明</strong></th></tr><tr><td>常规精准抽取（含筛选页+动画+结果页）</td><td>P0</td><td>核心体验闭环</td></tr><tr><td>极简全随机（摇一摇）</td><td>P0</td><td>趣味模式，差异化亮点</td></tr><tr><td>第三方外卖平台跳转</td><td>P0</td><td>转化终点</td></tr><tr><td>避雷库管理</td><td>P0</td><td>算法基石</td></tr><tr><td>负反馈机制（不满意再抽）</td><td>P1</td><td>体验优化</td></tr><tr><td>社区发现页（种草/踩雷浏览）</td><td>P1</td><td>UGC生态启动</td></tr><tr><td>美食足迹</td><td>P2</td><td>历史订单数据沉淀</td></tr><tr><td>发布编辑器（UGC发布）</td><td>P3</td><td>用户发表菜品评价入口</td></tr></table>
 <h4>5.2 核心模块详述</h4>
 <p><strong>模块一：首页（SCREEN_33）</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户场景</strong>：用户打开小程序，需要一个清晰、低摩擦的行动入口。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>核心元素</strong>：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 主按钮"开始抽取"（引导进入常规精准路径）</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 摇一摇入口/提示（引导进入极简趣味路径）</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 底部Tab导航：首页 / 发现 / 我的</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>交互说明</strong>：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 点击"开始抽取" → 跳转筛选要求页（SCREEN_20）</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 摇一摇手势触发 → 直接进入抽奖动画（跳过筛选）</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户场景</strong>：用户打开小程序，需要一个清晰、低摩擦的行动入口。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>核心元素</strong>：</p>
+<p class="list-item" style="margin-left:20px;">• 主按钮"开始抽取"（引导进入常规精准路径）</p>
+<p class="list-item" style="margin-left:20px;">• 摇一摇入口/提示（引导进入极简趣味路径）</p>
+<p class="list-item" style="margin-left:20px;">• 底部Tab导航：首页 / 发现 / 我的</p>
+<p class="list-item" style="margin-left:20px;">• <strong>交互说明</strong>：</p>
+<p class="list-item" style="margin-left:20px;">• 点击"开始抽取" → 跳转筛选要求页（SCREEN_20）</p>
+<p class="list-item" style="margin-left:20px;">• 摇一摇手势触发 → 直接进入抽奖动画（跳过筛选）</p>
 <p><strong>模块二：筛选要求页（SCREEN_20）</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户场景</strong>：用户希望在抽奖前圈定基本范围。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>筛选项</strong>：配送平台（美团/饿了么）、美食分类、预算区间、配送距离</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>交互说明</strong>：选择完成后点击"开始抽取" → 进入抽奖过渡动画页</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>默认值策略</strong>：所有筛选项均有默认值，允许用户不做任何设置直接抽取</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户场景</strong>：用户希望在抽奖前圈定基本范围。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>筛选项</strong>：配送平台（美团/饿了么）、美食分类、预算区间、配送距离</p>
+<p class="list-item" style="margin-left:20px;">• <strong>交互说明</strong>：选择完成后点击"开始抽取" → 进入抽奖过渡动画页</p>
+<p class="list-item" style="margin-left:20px;">• <strong>默认值策略</strong>：所有筛选项均有默认值，允许用户不做任何设置直接抽取</p>
 <p><strong>模块三：抽奖过渡动画（SCREEN_39）</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户场景</strong>：等待结果时的情感峰值，强化盲盒惊喜感。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>动画形式</strong>：大转盘 / 老虎机（任选一种，后续可A/B测试）</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>交互说明</strong>：动画播放约2-3秒后自动跳转至最终菜品展示页</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户场景</strong>：等待结果时的情感峰值，强化盲盒惊喜感。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>动画形式</strong>：大转盘 / 老虎机（任选一种，后续可A/B测试）</p>
+<p class="list-item" style="margin-left:20px;">• <strong>交互说明</strong>：动画播放约2-3秒后自动跳转至最终菜品展示页</p>
 <p><strong>模块四：最终菜品展示页（SCREEN_4）</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户场景</strong>：用户看到抽奖结果，决定是否采纳。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>展示内容</strong>：菜品高清图、名称、价格、配送时间、距离</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>核心操作</strong>：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 点击"立即下单" → 通过微信小程序API跳转至对应外卖平台</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 点击"不满意？再抽一次" → 触发负反馈，返回重新抽取</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户场景</strong>：用户看到抽奖结果，决定是否采纳。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>展示内容</strong>：菜品高清图、名称、价格、配送时间、距离</p>
+<p class="list-item" style="margin-left:20px;">• <strong>核心操作</strong>：</p>
+<p class="list-item" style="margin-left:20px;">• 点击"立即下单" → 通过微信小程序API跳转至对应外卖平台</p>
+<p class="list-item" style="margin-left:20px;">• 点击"不满意？再抽一次" → 触发负反馈，返回重新抽取</p>
 <p><strong>模块五：发现页 / 社区（SCREEN_10）</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户场景</strong>：用户浏览他人的种草推荐和踩雷吐槽以及发表个人评价。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>内容形态</strong>：种草卡片 / 踩雷卡片（带图片+简短评价），发布编辑器</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>转化链路</strong>：点击卡片 → 查看详情 → 点击"去试试" → 反向引流至抽奖页</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 		点击加号→ 编辑评价（文字+图片+标签（种草/踩雷））→ 发布</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户场景</strong>：用户浏览他人的种草推荐和踩雷吐槽以及发表个人评价。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>内容形态</strong>：种草卡片 / 踩雷卡片（带图片+简短评价），发布编辑器</p>
+<p class="list-item" style="margin-left:20px;">• <strong>转化链路</strong>：点击卡片 → 查看详情 → 点击"去试试" → 反向引流至抽奖页</p>
+<p class="list-item" style="margin-left:20px;">• 		点击加号→ 编辑评价（文字+图片+标签（种草/踩雷））→ 发布</p>
 <p><strong>模块六：个人中心（SCREEN_11）</strong></p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>用户场景</strong>：用户管理个人偏好，尤其是维护自己的避雷库。</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• <strong>核心功能</strong>：</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 查看发布过帖子和个人消息</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 避雷库维护（添加/删除过敏食材、不喜品类等关键词标签）—— 这是产品最核心的个性化配置</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 历史订单查看</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 反馈与建议</p>
+<p class="list-item" style="margin-left:20px;">• <strong>用户场景</strong>：用户管理个人偏好，尤其是维护自己的避雷库。</p>
+<p class="list-item" style="margin-left:20px;">• <strong>核心功能</strong>：</p>
+<p class="list-item" style="margin-left:20px;">• 查看发布过帖子和个人消息</p>
+<p class="list-item" style="margin-left:20px;">• 避雷库维护（添加/删除过敏食材、不喜品类等关键词标签）—— 这是产品最核心的个性化配置</p>
+<p class="list-item" style="margin-left:20px;">• 历史订单查看</p>
+<p class="list-item" style="margin-left:20px;">• 反馈与建议</p>
 <h3>六、 非功能需求</h3>
 <h4>6.1 性能需求</h4>
 <table><tr><th><strong>指标</strong></th><th><strong>目标值</strong></th></tr><tr><td>首屏加载时间</td><td>&lt; 2秒</td></tr><tr><td>抽奖算法响应时间</td><td>&lt; 1秒（含动画缓冲）</td></tr><tr><td>接口平均响应时间</td><td>&lt; 500ms</td></tr></table>
 <h4>6.2 数据埋点需求</h4>
 <table><tr><th><strong>埋点事件</strong></th><th><strong>说明</strong></th></tr><tr><td>page_view（全页面）</td><td>页面PV/UV</td></tr><tr><td>click_start_draw（首页开始抽取）</td><td>常规路径入口点击率</td></tr><tr><td>click_shake_draw（摇一摇触发）</td><td>趣味模式使用率</td></tr><tr><td>click_order（立即下单）</td><td>转化核心指标</td></tr><tr><td>click_retry（不满意再抽）</td><td>负反馈频率</td></tr><tr><td>filter_value（筛选页各项参数）</td><td>用户偏好数据沉淀</td></tr></table>
 <h4>6.3 兼容性</h4>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 微信版本：最低支持微信 8.0+</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 系统：iOS 14+ / Android 8+</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• 屏幕适配：全面适配主流机型（含刘海屏）</p>
+<p class="list-item" style="margin-left:20px;">• 微信版本：最低支持微信 8.0+</p>
+<p class="list-item" style="margin-left:20px;">• 系统：iOS 14+ / Android 8+</p>
+<p class="list-item" style="margin-left:20px;">• 屏幕适配：全面适配主流机型（含刘海屏）</p>
 <h4>6.4 风险与对策</h4>
 <table><tr><th><strong>风险项</strong></th><th><strong>等级</strong></th><th><strong>对策</strong></th></tr><tr><td>第三方外卖平台跳转不稳定</td><td>高</td><td>建立多级平滑降级机制，建立专有的中间层架构集中处理从抽奖结果到第三方落地页的转换逻辑。</td></tr><tr><td>避雷库规则增多致算法延迟</td><td>中</td><td>使用Redis缓存热门区域候选池数据</td></tr><tr><td>LBS精度不足影响距离筛选</td><td>中</td><td>调用微信原生高精度定位接口</td></tr><tr><td>冷启动阶段候选池数据不足</td><td>中</td><td>预设默认菜品种子数据覆盖主流商圈</td></tr><tr><td>第三方数据更新</td><td>高</td><td>通过官方的CPS(分销)接口获取数据</td></tr></table>
 <h3>七、 附录</h3>
 <h4>7.1 原型设计稿</h4>
+<div class="embedded-docs">📎 内嵌文档：<a href="preview/embedded_2.html">原型设计 - 首页 →</a> &nbsp;|&nbsp; <a href="preview/embedded_3.html">原型设计 - 发现页 →</a> &nbsp;|&nbsp; <a href="preview/embedded_4.html">原型设计 - 个人中心 →</a></div>
 <h4>7.2 参考文档</h4>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• "替你选"核心逻辑说明书 V2</p>
-<div class="image-container"><img src="images/img_rId17.png" alt="图片" loading="lazy"></div>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• "替你选"功能流程图（User Flow）</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• “替你选”小程序技术可行性说明书</p>
-<p style="margin-left:20px;text-indent:-20px;padding-left:20px;">• “替你选”小程序技术可行性分析报告.docx</p>
-<div class="back-btn"><a href="index.html" title="返回首页">←</a></div>
-<script>
-  if (window.location.pathname.endsWith('prd.html') || window.location.pathname.endsWith('/')) {
-    document.querySelector('.back-btn').style.display = 'none';
-  }
-</script>
+<p class="list-item" style="margin-left:20px;">• "替你选"核心逻辑说明书 V2</p>
+<div class="embedded-docs">📎 内嵌文档：<a href="preview/embedded_5.html">「替你选」核心逻辑与架构说明书 V2 →</a></div>
+<div class="image-container"><img src="preview/images/img_prd_rId17.png" alt="图片" loading="lazy"></div>
+<p class="list-item" style="margin-left:20px;">• "替你选"功能流程图（User Flow）</p>
+<p class="list-item" style="margin-left:20px;">• “替你选”小程序技术可行性说明书</p>
+<p class="list-item" style="margin-left:20px;">• “替你选”小程序技术可行性分析报告.docx</p>
+<div class="embedded-docs">📎 内嵌文档：<a href="preview/embedded_6.html">「替你选」小程序技术可行性说明书 →</a></div>
+<div class="back-bar">
+  <a href="prd.html">← 返回PRD文档</a>
+  <span>「替你选」微信小程序 · PRD文档</span>
+</div>
 
 </body>
 </html>
