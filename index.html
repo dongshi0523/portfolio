@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>董事 - 作品集</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,"PingFang SC",sans-serif;background:#fafafa;color:#1a1a1a;-webkit-font-smoothing:antialiased}
+.hero{background:#0a0a0a;color:white;padding:80px 24px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);border-radius:50%}
+.hero-content{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.hero h1{font-size:36pt;font-weight:700;letter-spacing:-1px;margin-bottom:8px}
+.hero .role{font-size:13pt;color:#a0a0a0;font-weight:300;margin-bottom:24px}
+.hero .role span{color:#3b82f6;font-weight:500}
+.hero .meta{display:flex;gap:20px;font-size:9pt;color:#666;flex-wrap:wrap}
+.container{max-width:680px;margin:0 auto;padding:40px 24px 80px}
+.section-label{font-size:9pt;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#3b82f6;margin-bottom:24px}
+.card{background:white;border:1px solid #e5e5e5;border-radius:16px;padding:32px;margin-bottom:20px;transition:box-shadow 0.2s,border-color 0.2s}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.06);border-color:#d0d0d0}
+.card-tag{display:inline-block;font-size:8pt;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:6px;margin-bottom:14px}
+.tag-primary{background:#eff6ff;color:#2563eb}
+.tag-secondary{background:#f0fdf4;color:#16a34a}
+.tag-tertiary{background:#faf5ff;color:#9333ea}
+.card h2{font-size:15pt;font-weight:600;margin-bottom:10px;color:#0a0a0a}
+.card .subtitle{font-size:10pt;color:#888;margin-bottom:16px;line-height:1.6}
+.card ul{list-style:none;padding:0}
+.card li{font-size:10pt;color:#444;line-height:1.7;padding:4px 0 4px 18px;position:relative}
+.card li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;background:#3b82f6;border-radius:50%}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f0f0}
+.card .tag-item{font-size:8pt;font-weight:500;padding:4px 10px;border-radius:6px;background:#f5f5f5;color:#555}
+.card .links{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.card .links a{font-size:10pt;color:#3b82f6;text-decoration:none;font-weight:500;padding:6px 14px;border:1px solid #3b82f6;border-radius:8px;transition:all 0.2s}
+.card .links a:hover{background:#3b82f6;color:white}
+.card .links a.primary{background:#3b82f6;color:white}
+.card .links a.primary:hover{background:#2563eb}
+.footer{text-align:center;padding:40px 24px;font-size:8pt;color:#bbb}
+</style>
+</head>
+<body>
+<div class="hero"><div class="hero-content">
+<h1>董事</h1>
+<div class="role">产品经理实习生 · <span>湖北汽车工业学院</span> · 计算机科学与技术</div>
+<div class="meta"><span>📱 186-0278-8587</span><span>✉️ 3166466325@qq.com</span><span>💬 p252252</span></div>
+</div></div>
+<div class="container">
+<div class="section-label">Projects</div>
+<div class="card">
+<div class="card-tag tag-primary">核心项目</div>
+<h2>「替你选」微信小程序</h2>
+<div class="subtitle">帮助00后解决"吃什么"决策困难 — 通过硬性筛选 + 个性化避雷库 + 随机加权算法，将选择焦虑转化为盲盒式抽奖体验。</div>
+<ul>
+<li>独立完成产品全流程：用户调研 → 需求分析 → PRD撰写 → 算法架构设计 → MVP开发 → 部署上线</li>
+<li>设计四阶段智能抽奖算法：硬性过滤 → 条件自动放宽 → 动态权重计算 → 随机触发+负反馈</li>
+<li>构建"避雷库"核心壁垒：用户维护的个性化标签反向作用于算法，形成"用越久越精准"的数据资产</li>
+<li>设计双路径交互：常规精准抽取（有筛选）+ 摇一摇全随机（纯趣味），覆盖不同场景</li>
+</ul>
+<div class="tags"><span class="tag-item">PRD撰写</span><span class="tag-item">用户调研</span><span class="tag-item">算法设计</span><span class="tag-item">微信小程序</span><span class="tag-item">MVP开发</span></div>
+<div class="links">
+<a href="prd.html" class="primary">📄 查看PRD文档</a>
+<a href="https://dongshi0523.github.io/tixuan-mvp/tinxuan/stitch-bubble.html" target="_blank">🚀 在线体验MVP</a>
+</div>
+</div>
+<div class="card">
+<div class="card-tag tag-secondary">产品分析</div>
+<h2>「同一市场，两种路径」</h2>
+<div class="subtitle">基于用户体验五大要素框架，对网易BUFF与悠悠有品进行深度对比分析。</div>
+<ul>
+<li>核心洞察：BUFF是"证券交易所"模式，悠悠是"共享经济"模式</li>
+<li>发现关键设计差异：BUFF"一对一"展示 vs 悠悠"一对多"展示</li>
+<li>输出完整分析报告（含18张App截图、数据表格、SWOT分析）</li>
+</ul>
+<div class="tags"><span class="tag-item">竞品分析</span><span class="tag-item">五大要素框架</span><span class="tag-item">数据驱动</span></div>
+<div class="links"><a href="report.html" class="primary">📊 查看完整报告</a></div>
+</div>
+<div class="card">
+<div class="card-tag tag-tertiary">个人工具</div>
+<h2>MacClipboard</h2>
+<div class="subtitle">macOS剪贴板历史管理器 — 终端命令行启动，悬浮窗展示剪贴板历史。</div>
+<ul>
+<li>使用Vibe Coding方式独立完成Swift/SwiftUI原生开发</li>
+<li>体现从用户痛点出发的产品思维，快速验证并交付MVP</li>
+</ul>
+<div class="tags"><span class="tag-item">Swift</span><span class="tag-item">Vibe Coding</span><span class="tag-item">MVP交付</span></div>
+<div class="links"><a href="https://github.com/dongshi0523/MacClipboard" target="_blank">📦 GitHub仓库</a></div>
+</div>
+</div>
+<div class="footer">© 2026 董事</div>
+</body></html>

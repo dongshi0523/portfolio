@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「替你选」PRD文档</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,"PingFang SC",sans-serif;background:#fafafa;color:#1a1a1a}
+.hero{background:#0a0a0a;color:white;padding:50px 24px 35px;text-align:center}
+.hero h1{font-size:20pt;font-weight:600}
+.hero p{font-size:10pt;color:#888;margin-top:6px}
+.container{max-width:720px;margin:0 auto;padding:30px 24px 60px}
+.back{display:inline-block;margin:16px 0;font-size:10pt;color:#3b82f6;text-decoration:none}
+.back:hover{text-decoration:underline}
+h2{font-size:14pt;font-weight:600;color:#1a5c8a;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid #1a5c8a}
+h3{font-size:12pt;font-weight:600;margin:18px 0 8px;color:#333}
+h4{font-size:11pt;font-weight:600;margin:14px 0 6px;color:#555}
+p{font-size:10pt;line-height:1.8;margin:5px 0;color:#444}
+ul{margin:5px 0 5px 18px}
+li{font-size:10pt;line-height:1.7;margin:3px 0;color:#444}
+.tree{font-family:monospace;font-size:9pt;background:#f5f5f5;padding:12px 16px;border-radius:8px;margin:10px 0;line-height:1.6;white-space:pre}
+.insight{background:#f0f6ff;border-left:4px solid #1a5c8a;padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:10pt}
+.ec{background:white;border:1px solid #e5e5e5;border-radius:12px;padding:16px;margin:12px 0;display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;transition:all 0.2s}
+.ec:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#3b82f6}
+.ei{font-size:24pt;width:50px;text-align:center}
+.et h4{font-size:11pt;font-weight:600;margin-bottom:2px}
+.et p{font-size:9pt;color:#888;margin:0}
+.ea{color:#3b82f6;font-size:14pt;margin-left:auto}
+</style>
+</head>
+<body>
+<div class="hero"><h1>「替你选」PRD文档</h1><p>微信小程序产品需求文档 v1.0</p></div>
+<div class="container">
+<a class="back" href="index.html">&larr; 返回作品集</a>
+
+<h2>一、文档概述</h2>
+<h3>1.1 文档目的</h3>
+<p>本文档为"替你选"微信小程序的完整产品需求文档，面向对象为招聘方（HR/面试官），旨在系统化展示产品的需求背景、目标用户、核心逻辑与功能设计。</p>
+
+<h2>二、产品概述</h2>
+<h3>2.1 产品定位</h3>
+<p>一款帮助00后大学生和上班族解决"吃什么"决策困难的微信小程序——通过硬性筛选+个性化避雷库+随机加权算法，将选择焦虑转化为盲盒式抽奖体验。</p>
+
+<h3>2.2 需求背景与市场机会</h3>
+<ul>
+<li>用户痛点：外卖平台SKU爆炸，用户每天面对"吃什么"的选择疲劳，决策时间过长</li>
+<li>市场空白：现有外卖平台强调"搜索"和"浏览"，缺少专门针对"决策困难群体"的轻量工具</li>
+<li>行为趋势：盲盒、随机抽奖类玩法在Z世代中接受度极高</li>
+</ul>
+
+<h3>2.3 目标用户画像</h3>
+<p>核心用户群：00后大学生+初入职场上班族</p>
+<ul>
+<li>用户故事1：小张，大二学生，每天中午打开外卖App刷20分钟不知道吃什么——他需要一个10秒内帮他做决定的工具</li>
+<li>用户故事2：小李，毕业一年的上班族，加班后不想思考晚饭，但有忌口——希望工具既懂他的雷区又能快速推荐</li>
+</ul>
+
+<h2>三、产品架构</h2>
+<h3>3.1 产品功能结构图</h3>
+<div class="tree">替你选
+├── 核心抽奖工具
+│   ├── 常规精准抽取（设置平台→分类→预算→距离→抽奖→展示）
+│   ├── 极简全随机（摇一摇→自动抽取→展示）
+│   └── 结果操作（立即下单 / 不满意再抽一次）
+├── 社区互动
+│   ├── 发现页（种草/踩雷卡片浏览）
+│   ├── 详情查看 + 反向引流至抽奖
+│   └── 发布编辑器（规划中）
+└── 个人中心
+    ├── 避雷库管理（核心：反向控制算法）
+    ├── 历史足迹
+    ├── 个性化偏好设置
+    └── 反馈与建议</div>
+
+<h3>3.2 核心业务流程</h3>
+<ul>
+<li>路径A（常规模式）：首页→筛选要求页→抽奖动画→结果页→跳转美团/饿了么下单</li>
+<li>路径B（趣味模式）：首页→摇一摇→绕过精细筛选→动画→结果页</li>
+</ul>
+
+<h2>四、核心引擎：智能抽奖算法</h2>
+
+<h3>4.1 算法设计原则</h3>
+<div class="insight"><strong>解决的核心矛盾：在保证结果"可接受"的前提下最小化用户决策成本，同时保留惊喜感。</strong></div>
+
+<h3>4.2 四阶段执行流程</h3>
+<p>第一阶段：硬性过滤（营业状态+避雷库+距离+预算）</p>
+<p>第二阶段：条件自动放宽（候选池&lt;3时触发）</p>
+<p>第三阶段：权重计算（社区种草/踩雷/历史行为/时段适配）</p>
+<p>第四阶段：随机触发与负反馈</p>
+
+<h3>4.3 避雷库：产品的反向控制壁垒</h3>
+<div class="insight"><strong>避雷库不是简单的黑名单过滤，而是一个持续生长的个性化数据资产——用户维护得越久，推荐越精准，迁移成本越高，天然形成留存壁垒。</strong></div>
+
+<h3>深入阅读：算法架构详细设计</h3>
+<a class="ec" href="algo.html">
+<div class="ei">📊</div>
+<div class="et"><h4>抽奖引擎算法架构方案书</h4><p>四阶段算法的详细技术设计与实现方案</p></div>
+<div class="ea">&rarr;</div>
+</a>
+
+<h3>深入阅读：核心逻辑说明书</h3>
+<a class="ec" href="logic.html">
+<div class="ei">📋</div>
+<div class="et"><h4>核心逻辑与架构说明书V2</h4><p>产品核心逻辑、业务流程与架构设计</p></div>
+<div class="ea">&rarr;</div>
+</a>
+
+<h3>深入阅读：技术可行性分析</h3>
+<a class="ec" href="tech.html">
+<div class="ei">⚙️</div>
+<div class="et"><h4>技术可行性分析报告</h4><p>技术架构评估、模块可行性与风险分析</p></div>
+<div class="ea">&rarr;</div>
+</a>
+
+<h2>五、功能需求详述</h2>
+<h3>5.1 首页</h3>
+<p>用户场景：打开小程序，需要清晰、低摩擦的行动入口。</p>
+<p>核心元素：主按钮"开始抽取"、摇一摇入口、底部Tab导航（首页/发现/我的）</p>
+
+<h3>深入阅读：首页设计稿</h3>
+<a class="ec" href="首页.pdf" target="_blank">
+<div class="ei">🎨</div>
+<div class="et"><h4>首页界面设计稿</h4><p>小程序首页原型设计</p></div>
+<div class="ea">&rarr;</div>
+</a>
+
+<h3>5.2 发现页/社区</h3>
+<p>用户场景：浏览他人的种草推荐和踩雷吐槽。</p>
+<p>内容形态：种草卡片/踩雷卡片（带图片+简短评价）</p>
+
+<h3>深入阅读：发现页设计稿</h3>
+<a class="ec" href="发现页.pdf" target="_blank">
+<div class="ei">🔍</div>
+<div class="et"><h4>发现页界面设计稿</h4><p>社区发现页原型设计</p></div>
+<div class="ea">&rarr;</div>
+</a>
+
+<h3>5.3 个人中心</h3>
+<p>用户场景：管理个人偏好，尤其是维护避雷库。</p>
+<p>核心功能：避雷库维护、历史订单、反馈与建议</p>
+
+<h3>深入阅读：个人中心设计稿</h3>
+<a class="ec" href="个人中心.pdf" target="_blank">
+<div class="ei">👤</div>
+<div class="et"><h4>个人中心设计稿</h4><p>个人中心与避雷库原型</p></div>
+<div class="ea">&rarr;</div>
+</a>
+
+<h2>六、非功能需求</h2>
+<h3>6.1 性能需求</h3>
+<p>抽奖响应时间&lt;2秒，页面加载时间&lt;1.5秒</p>
+
+<h3>6.2 兼容性</h3>
+<ul>
+<li>微信版本：最低支持微信8.0+</li>
+<li>系统：iOS 14+ / Android 8+</li>
+<li>屏幕适配：全面适配主流机型（含刘海屏）</li>
+</ul>
+
+<h2>七、附录</h2>
+<p>完整PRD文档、算法架构方案书、核心逻辑说明书、技术可行性说明书、界面设计稿均可在本页面直接浏览或下载。</p>
+
+<a class="back" href="index.html">&larr; 返回作品集</a>
+</div>
+</body>
+</html>
